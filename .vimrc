@@ -37,8 +37,8 @@ set incsearch
 " 高亮当前行
 set cursorline
 
-" 我的状态行显示的内容（包括文件类型和解码） 
-set statusline=%F%m%r%h%w\[POS=%l,%v][%p%%]\%{strftime(\"%Y-%m-%d\ %H:%M:%S\")}
+" 我的状态行显示的内容（包括文件类型和解码） -因为装了airline插件，暂不启用
+" set statusline=%F%m%r%h%w\[POS=%l,%v][%p%%]\%{strftime(\"%Y-%m-%d\ %H:%M:%S\")}
 
 " 总是显示状态行 
 set laststatus=2
@@ -57,13 +57,13 @@ autocmd FileType c,cpp,python set shiftwidth=4 | set expandtab
 autocmd FileType ruby set shiftwidth=2 | set expandtab
 
 " 侦测文件类型 
-filetype on
+filetype off
 
 " 载入文件类型插件 
-filetype plugin on
+filetype plugin off
 
 " 为特定文件类型载入相关缩进文件 
-filetype indent on
+filetype indent off
 
 " 括号自动补全
 inoremap ( ()<ESC>i
@@ -106,3 +106,8 @@ set clipboard+=unnamed
 
 " 顶部底部保持3行距离
 set scrolloff=3
+
+"如果配置文件存在则启动vundle插件管理器
+if filereadable(expand("~/.vimrc.vundle"))
+	source ~/.vimrc.vundle
+endif
