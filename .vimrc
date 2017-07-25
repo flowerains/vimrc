@@ -15,8 +15,8 @@ syntax on
 " 设置配色
 colorscheme solarized
 
-" 设置字体
-set guifont=Monaco:h14
+" 设置字体-打过补丁的那种
+set guifont=Menlo\ for\ Powerline:h14
 
 " 开启行号显示
 set number
