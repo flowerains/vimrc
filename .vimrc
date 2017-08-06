@@ -13,6 +13,7 @@ endif
 syntax on
 
 " 设置配色
+set background=dark
 colorscheme solarized
 
 " 设置字体-打过补丁的那种
@@ -111,3 +112,5 @@ set scrolloff=3
 if filereadable(expand("~/.vimrc.vundle"))
 	source ~/.vimrc.vundle
 endif
+
+" 左右移动buffer快捷键映射

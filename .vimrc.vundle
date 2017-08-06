@@ -8,6 +8,8 @@ call vundle#begin()
 
 " let Vundle manage Vundle, required
 Plugin 'VundleVim/Vundle.vim'
+" VIM的基本库
+Plugin 'vim-scripts/L9'
 
 " My Plugin
 " 状态条增强，好看的一逼
@@ -18,7 +20,7 @@ let g:airline_powerline_fonts = 1
 " airline的buffer插件
 let g:airline#extensions#tabline#enabled = 1
 
-" 树形管理器，老牌
+" 树形管理器
 Plugin 'scrooloose/nerdtree'
 " VIM启动的时候就打开NERDTree
 autocmd vimenter * NERDTree
@@ -32,30 +34,48 @@ autocmd VimEnter * if argc() == 1 && isdirectory(argv()[0]) && !exists("s:std_in
 map <F2> :NERDTreeToggle<CR>
 " 如果vim窗口只有NERDTree 则自动关闭，避免多次退出
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
+" 是否显示隐藏文件
+let NERDTreeShowHidden=1
+" 设置宽度
+let NERDTreeWinSize=31
+" 忽略一下文件的显示
+let NERDTreeIgnore=['\.pyc','\~$','\.swp']
+" 显示书签列表
+let NERDTreeShowBookmarks=1
 
-" taglist，配合CTags显示函数名称
-Plugin 'taglist.vim'
-" 让taglist窗口出现在Vim的右边
-let Tlist_Use_Right_Window = 1
-" 当同时显示多个文件中的tag时，设置为1，可使taglist只显示当前文件tag，其它文件的tag都被折叠起来。
-let Tlist_File_Fold_Auto_Close = 1
-" 只显示一个文件中的tag，默认为显示多个
-let Tlist_Show_One_File = 1
-" Taglist窗口打开时，立刻切换为有焦点状态
-let Tlist_GainFocus_On_ToggleOpen = 1
-" 如果taglist窗口是最后一个窗口，则退出vim
-let Tlist_Exit_OnlyWindow = 1
-" 设置窗体宽度为32
-let Tlist_WinWidth = 32
-" 这里比较重要了，设置ctags的位置，不是指向MacOS自带的那个，而是我们用homebrew安装的那个
-let Tlist_Ctags_Cmd ='/usr/local/Cellar/ctags/5.8_1/bin/ctags'
-" 热键设置,随便设置，我设成F3
-map <F3> :TlistToggle<CR>
+" 使用TagBar显示函数列表
+Bundle 'majutsushi/tagbar'
+" 快捷键
+nmap <F3> :TagbarToggle<CR>
+" Ctags的目录
+let g:tagbar_ctags_bin='/usr/local/bin/ctags'
+" 定制语言tagBar显示内容 -Ruby
+let g:tagbar_type_ruby = {
+    \ 'kinds' : [
+        \ 'm:modules',
+        \ 'c:classes',
+        \ 'd:describes',
+        \ 'C:contexts',
+        \ 'f:methods',
+        \ 'F:singleton methods'
+    \ ]
+\ }
 
 " ACK搜索插件
 Plugin 'mileszs/ack.vim'
 let g:ackprg = 'ag --nogroup --nocolor --column'
 map <F4> :Ack<space>
+
+" 跳转插件
+Bundle 'Lokaltog/vim-easymotion'
+" 忽略大小写
+let g:EasyMotion_smartcase = 1
+
+" 范围选中插件，很强 默认是+和-号
+Bundle 'terryma/vim-expand-region'
+
+" 加注释插件，默认gcc(注释一行)和gc(注释一个段落)
+Bundle 'tpope/vim-commentary'
 
 " All of your Plugins must be added before the following line
 call vundle#end()            " required
